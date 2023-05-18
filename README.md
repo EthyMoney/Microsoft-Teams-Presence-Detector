@@ -21,6 +21,7 @@ The application watches the Teams log file for changes and uses regular expressi
 
 - Node.js v18 or higher
 - Microsoft Teams (desktop app only, not browser version)
+- Running Teams on Windows 10/11 OS (MacOS and Linux support coming!)
 
 ## Installation
 
