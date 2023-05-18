@@ -1,0 +1,25 @@
+{
+  "name": "microsoft-teams-presence-detector",
+  "version": "1.0.0",
+  "description": "A simple app to detect changes to presence (online status) on Teams and notify for taking actions on changes",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector.git"
+  },
+  "keywords": [
+    "ms-teams",
+    "teams",
+    "presence",
+    "status"
+  ],
+  "author": "Logan (EthyMoney)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector/issues"
+  },
+  "homepage": "https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector#readme"
+}
