@@ -17,13 +17,13 @@ This is a Node.js application that monitors the Microsoft Teams log file for use
 
 The application watches the Teams log file for changes and uses regular expressions to extract the current state from the log entries. It keeps track of the last known size of the file and reads the new content after each change. It compares the new state with the previous state to identify the latest presence state and alert when it has changed.
 
-The best part? No cloud connection, API, or any authentication is needed thanks to the simplicity of just reading logfile stored on your local machine. Luckily, Microsoft writes presence changes to the logfile, so we can do away with all the complicated Azure account and Graph API setup and authentication.
+The best part? No cloud connection, API, or any authentication is needed thanks to the simplicity of just reading a log file stored on your local machine. Luckily, Microsoft writes presence changes to the log file, so we can do away with all the complicated Azure account and Graph API setup and authentication.
 
 ## Prerequisites
 
 - Node.js v18 or higher
 - Microsoft Teams (desktop app only, not browser version)
-- Running Teams on Windows 10/11 OS (MacOS and Linux support coming!)
+- Running on Windows 10/11, MacOS (Apple Silicon too!), and most flavors of Linux
 
 ## Installation
 
