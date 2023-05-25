@@ -1,15 +1,31 @@
 const fs = require('fs');
+const os = require('os');
 
-// get the windows username of the current user so we can find the log file
-//TODO: MacOS and Linux support
-const username = process.env['USERNAME'];
+// get the username of the current user
+const username = os.userInfo().username;
 console.log('hello, ' + username + '!');
 
-const filePath = `C:/Users/${username}/AppData/Roaming/Microsoft/Teams/logs.txt`;
-
+let filePath = "";
 let lastKnownSize = 0;
 let latestStateChange = null;
 let prevState = null;
+
+// Get the current operating system
+const platform = os.platform();
+
+if (platform === 'win32') {
+  console.log('Running on Windows');
+  filePath = `C:/Users/${username}/AppData/Roaming/Microsoft/Teams/logs.txt`;
+} else if (platform === 'darwin') {
+  console.log('Running on macOS');
+  filePath = `/Users/${username}/Library/Application Support/Microsoft/Teams/logs.txt`;
+} else if (platform === 'linux') {
+  console.log('Running on Linux');
+  filePath = `/home/${username}/.config/Microsoft/Microsoft Teams/logs.txt`;
+} else {
+  console.log(`Unknown platform: ${platform}. You will need to manually specify the path to the log file within the script code.`);
+  process.exit(1);
+}
 
 // Function to extract the new state from the log line
 function extractNewState(line) {
