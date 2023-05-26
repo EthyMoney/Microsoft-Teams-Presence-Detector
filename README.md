@@ -19,7 +19,7 @@ The application watches the Teams log file for changes and uses regular expressi
 
 The best part? No cloud connection, API, or any authentication is needed thanks to the simplicity of just reading a log file stored on your local machine. Luckily, Microsoft writes presence changes to the log file, so we can do away with all the complicated Azure account and Graph API setup and authentication.
 
-The app will detect what operating system you're on and your username so it can dynmaically update the file location path of the Teams log file before it loads it. If for some reason yours fails to load or you're file in in a different place than expected (like some flavors of linux), you can manually set the file path in the code to where your file actually is. Just remove the part that checks the operating system and set it yourself.
+The app will detect what operating system you're on and your username so it can dynmaically update the file location path of the Teams log file before it loads it. If for some reason yours fails to load or your file is in a different place than expected (like some flavors of linux), you can manually set the file path in the code to where your file actually is. Just remove the part that checks the operating system and set it yourself.
 
 ## Prerequisites
 
