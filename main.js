@@ -3,7 +3,7 @@ const os = require('os');
 
 // get the username of the current user
 const username = os.userInfo().username;
-console.log('hello, ' + username + '!');
+console.log('Hello, ' + username + '!');
 
 let filePath = "";
 let lastKnownSize = 0;
@@ -48,7 +48,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 
   const lines = data.split('\n');
 
-  console.log('log file loaded, current lines count: ' + lines.length)
+  console.log('Log file loaded, current lines count: ' + lines.length)
 
   lines.forEach(line => {
     if (line.includes('current state')) {
@@ -65,7 +65,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     // Do something with the latest state change here
   }
 
-  console.log('watching file for changes...')
+  console.log('Watching file for changes...\n')
 
   // Watch the file for changes
   fs.watchFile(filePath, (curr, prev) => {

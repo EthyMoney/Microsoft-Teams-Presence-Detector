@@ -4,7 +4,8 @@
   "description": "A simple app to detect changes to presence (online status) on Teams and notify for taking actions on changes",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
