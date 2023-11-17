@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector/issues"
   },
-  "homepage": "https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector#readme"
+  "homepage": "https://github.com/EthyMoney/Microsoft-Teams-Presence-Detector#readme",
+  "dependencies": {
+    "axios": "^1.6.2"
+  }
 }

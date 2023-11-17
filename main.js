@@ -1,5 +1,10 @@
 const fs = require('fs');
 const os = require('os');
+const axios = require('axios'); // Import axios library
+const config = require('./config.json'); // Import config file
+
+// Set the IP address and port of the lighting control API
+const lightingApiUrl = config.lightingControllerApiUrl;
 
 // get the username of the current user
 const username = os.userInfo().username;
@@ -26,6 +31,39 @@ if (platform === 'win32') {
   console.log(`Unknown platform: ${platform}. You will need to manually specify the path to the log file within the script code.`);
   process.exit(1);
 }
+
+// Define a mapping of states to lighting actions
+const stateToLightingAction = {
+  available: { endpoint: '/set_color', color: [0, 255, 0], message: 'green' },
+  busy: { endpoint: '/set_color', color: [255, 0, 0], message: 'red' },
+  donotdisturb: { endpoint: '/set_color', color: [128, 0, 128], message: 'purple (Do Not Disturb)' },
+  onthephone: { endpoint: '/alternating_colors', colors: { color1: [255, 0, 0], color2: [0, 0, 0] }, message: 'red and off during a call' },
+  inameeting: { endpoint: '/alternating_colors', colors: { color1: [255, 0, 0], color2: [0, 0, 0] }, message: 'red and off during a call' },
+  away: { endpoint: '/set_color', color: [255, 155, 0], message: 'yellow' },
+  berightback: { endpoint: '/set_color', color: [255, 105, 0], message: 'orange' },
+  offline: { endpoint: '/pulse_effect', color: [255, 255, 255], message: 'off' },
+};
+
+// Function to make API calls to control the lighting
+function controlLighting(newState) {
+  newState = newState.toLowerCase();
+  const lightingAction = stateToLightingAction[newState];
+
+  if (lightingAction) {
+    const { endpoint, color, colors, message } = lightingAction;
+
+    axios.post(`${lightingApiUrl}${endpoint}`, colors ? colors : { color })
+      .then(response => {
+        console.log(`Lighting set to ${message}:`, response.data.message);
+      })
+      .catch(error => {
+        console.error('Error setting lighting:', error.message);
+      });
+  } else {
+    console.log(`Unknown state: ${newState}`);
+  }
+}
+
 
 // Function to extract the new state from the log line
 function extractNewState(line) {
@@ -62,7 +100,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
   if (latestStateChange) {
     console.log(`Latest state change on startup: ${latestStateChange}`);
     prevState = latestStateChange;
-    // Do something with the latest state change here
+    controlLighting(latestStateChange); // Call the controlLighting function
   }
 
   console.log('Watching file for changes...\n')
@@ -107,10 +145,11 @@ fs.readFile(filePath, 'utf8', (err, data) => {
                   }
                 });
 
+                // When a new state is detected, call the controlLighting function
                 if (latestStateChange && latestStateChange !== prevState) {
                   console.log(`Latest state change detected: ${latestStateChange}`);
                   prevState = latestStateChange;
-                  // Do something with the latest state change here
+                  controlLighting(latestStateChange); // Call the controlLighting function
                 }
               }
 
