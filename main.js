@@ -42,6 +42,7 @@ const stateToLightingAction = {
   away: { endpoint: '/set_color', color: [255, 155, 0], message: 'yellow' },
   berightback: { endpoint: '/set_color', color: [255, 105, 0], message: 'orange' },
   offline: { endpoint: '/pulse_effect', color: [255, 255, 255], message: 'off' },
+  newactivity: { endpoint: '/alternating_colors', colors: { color1: [0, 0, 255], color2: [0, 0, 0] }, message: 'blue and off for new activity' }
 };
 
 // Function to make API calls to control the lighting
