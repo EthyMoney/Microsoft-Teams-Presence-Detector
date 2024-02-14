@@ -13,7 +13,8 @@
 
 This is a Node.js application that monitors the Microsoft Teams log file for user presence state change events and provides triggers to act on changes. This allows detection of changes to your online status (e.g., when you go from Available to Away) which can be used to trigger other actions, such as turning on/off lights in your home office, sending notifications to other applications, changing a status light color at your desk, and much more! Personally, I use this at work to change the color of an RGB light on my desk to indicate my status and tell people if I'm available or not before they walk over to ask me something.
 
-## **HEADS UP: This is currently NOT compatible with the "new" Teams. This only work with the old Teams due to the new one not writing presense states to a log file, which this program depends on.** This could change in the future where this log file method works again, but there's a good chance that this program will need to be reworked to work with the new Teams once it's being forced to use it. You can currently still opt to use the old one so this still works.
+## 🛑🛑 NOTICE: This is currently NOT compatible with the "new" Teams. 🛑🛑
+This only works with the old Teams due to the new one not writing presense states to a log file, which this program depends on. This could change in the future where this log file method works again, but there's a good chance that this program will need to be reworked to work with the new Teams once it's being forced to use it. You can currently still opt to use the old one so this still works.
 
 ## How It Works
 
