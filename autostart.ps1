@@ -7,7 +7,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 cd <path to your project directory here>
 
-pm2 start main.js -n teams-status-monitor
+pm2 start main.js -n teams-status-monitor --kill-timeout 15000 --shutdown-with-message
 
 # close the window after 5 seconds
 Start-Sleep -s 5

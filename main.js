@@ -47,22 +47,27 @@ const stateToLightingAction = {
 
 // Function to make API calls to control the lighting
 function controlLighting(newState) {
-  newState = newState.toLowerCase();
-  const lightingAction = stateToLightingAction[newState];
+  return new Promise((resolve, reject) => {
+    newState = newState.toLowerCase();
+    const lightingAction = stateToLightingAction[newState];
 
-  if (lightingAction) {
-    const { endpoint, color, colors, message } = lightingAction;
+    if (lightingAction) {
+      const { endpoint, color, colors, message } = lightingAction;
 
-    axios.post(`${lightingApiUrl}${endpoint}`, colors ? colors : { color })
-      .then(response => {
-        console.log(`Lighting set to ${message}:`, response.data.message);
-      })
-      .catch(error => {
-        console.error('Error setting lighting:', error.message);
-      });
-  } else {
-    console.log(`Unknown state: ${newState}`);
-  }
+      axios.post(`${lightingApiUrl}${endpoint}`, colors ? colors : { color })
+        .then(response => {
+          console.log(`Lighting set to ${message}:`, response.data.message);
+          resolve();
+        })
+        .catch(error => {
+          console.error('Error setting lighting:', error.message);
+          reject(error);
+        });
+    } else {
+      console.log(`Unknown state: ${newState}`);
+      reject(new Error(`Unknown state: ${newState}`));
+    }
+  });
 }
 
 
@@ -166,3 +171,58 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     }
   });
 });
+
+
+// Handle process exits so we can set the light accordingly without getting stuck in last state
+process.on('beforeExit', async (code) => {
+  console.log(`About to exit with code: ${code}`);
+  await exitHandler('offline');
+});
+
+// Handle process terminations
+process.on('SIGINT', () => {
+  console.log('Received SIGINT signal');
+  exitHandler('offline');
+});
+process.on('SIGTERM', () => {
+  console.log('Received SIGTERM signal');
+  exitHandler('offline');
+});
+process.on('SIGHUP', () => {
+  console.log('Received SIGHUP signal');
+  exitHandler('offline');
+});
+// Windows-specific PM2 signals via message from "--shutdown-with-message" arg (https://pm2.keymetrics.io/docs/usage/signals-clean-restart)
+process.on('message', msg => {
+  if (msg === 'shutdown') {
+    console.log('Received Windows PM2 shutdown message signal');
+    exitHandler('offline');
+  }
+});
+
+// Catch uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('An uncaught exception occurred!');
+  console.error(err.stack);
+  exitHandler('offline');
+});
+
+// Catch unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('An unhandled promise rejection occurred!');
+  console.error(`Promise: ${promise}, Reason: ${reason}`);
+  exitHandler('offline');
+});
+
+// Exit handler (waits for the light to be set before exiting, but times out after 10 seconds of waiting)
+async function exitHandler(state) {
+  try {
+    await Promise.race([
+      controlLighting(state),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout after 30 seconds')), 10000))
+    ]);
+  } catch (error) {
+    console.error('Error setting lighting:', error.message);
+  }
+  process.exit(1);
+}
