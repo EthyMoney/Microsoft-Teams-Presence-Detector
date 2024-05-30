@@ -1,11 +1,11 @@
 <p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/2203px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png" alt="Teams Logo" width="15%" height="auto">
+  <img src="assets/teams-logo.png" alt="Teams Logo" width="15%" height="auto">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://static.wixstatic.com/media/d98092_967d2f1b524e423c8c5c5644ea740e8e~mv2.png/v1/fill/w_450,h_448,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/d98092_967d2f1b524e423c8c5c5644ea740e8e~mv2.png" alt="Available Icon" width="10%" height="auto">
+  <img src="assets/available-icon.png" alt="Available Icon" width="10%" height="auto">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://static.wixstatic.com/media/d98092_b176baa20fcb427daec31fe967c0acf7~mv2.png/v1/fill/w_450,h_448,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/d98092_b176baa20fcb427daec31fe967c0acf7~mv2.png" alt="Away Icon" width="10%" height="auto">
+  <img src="assets/away-icon.png" alt="Away Icon" width="10%" height="auto">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://static.wixstatic.com/media/d98092_fbff9ee78d3d401891dde6cfd598e7f5~mv2.png/v1/fill/w_450,h_448,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/d98092_fbff9ee78d3d401891dde6cfd598e7f5~mv2.png" alt="Available Icon" width="10%" height="auto">
+  <img src="assets/busy-icon.png" alt="Busy Icon" width="10%" height="auto">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
